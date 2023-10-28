@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="./style.css">
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <script>
+      function back_to_lobby() {
+        delete_session();
+        window.location.href = 'https://jcamille2023.github.io/tictactoe/multiplayer' ;
+        
+      }
+
+      function random_number_gen() {
+    return Math.floor(Math.random() * 9999);
+  }
+    </script>
+    
+    <script src="./script-2.js" type="module"></script>
+
+  
+
+  <!-- Header -->
+  <header class="row">
+    <div class="column">
+      <h4>Jossaya Camille</h4>
+    </div>
+    <div class="column navbar">
+      <a href="/">Home</a>
+      <a href="/portfolio">Portfolio</a>
+    </div>
+</header>
+
+  
+<h1>Tic Tac Toe Online</h1>
+<p>Your username: </p>
+<p id="user_id"></p>
+
+<p>Your opponent: </p>
+<p id="opponent_id"></p>
+
+<p>Game ID: </p>
+<p id="game_id"></p>
+
+<p id="user_turn">X goes first</p>
+<table>
+ 
+  <tr>
+    <td width="33.3%">
+      <button class="box" id="button_1" onclick="">1</button>
+    </td>
+    <td width="33.3%">
+      <button class="box" id="button_2" onclick="">2</button>
+    </td>
+    <td width="33.3%">
+      <button class="box" id="button_3" onclick="">3</button>
+    </td>
+  </tr>
+  <tr>
+    <td width="33.3%">
+      <button class="box" id="button_4" onclick=")">4</button>
+    </td>
+    <td width="33.3%">
+      <button class="box" id="button_5" onclick="">5</button>
+    </td>
+    <td width="33.3%">
+      <button class="box" id="button_6" onclick="">6</button>
+    </td>
+  </tr>
+  <tr>
+    <td width="33.3%">
+      <button class="box" id="button_7" onclick="">7</button>
+    </td>
+    <td width="33.3%">
+      <button class="box" id="button_8" onclick="">8</button>
+    </td>
+    <td width="33.3%">
+      <button class="box" id="button_9" onclick="">9</button>
+    </td>
+  </tr>
+</table>
+  <p id="game_winner"></p>
+  <button style="display: none" onclick="play_again()" id="play_again">Play again?</button>
+  <button onclick="back_to_lobby()">Back to lobby</button>
+
+    
+  </body>
+</html>
+
+
+
+
+    
+

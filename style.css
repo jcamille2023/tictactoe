@@ -1,0 +1,25 @@
+box {
+  text-align: center;
+}
+
+table, td {
+  border: 1px solid;
+  padding: 5px;
+}
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+
+.navbar {
+  text-align: right;
+}
+
+a {
+  padding: 5px;
+}
+
+
