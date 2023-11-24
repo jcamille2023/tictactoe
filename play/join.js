@@ -11,6 +11,7 @@ var n = 0;
 var positions = {};
 var gameId = 0;
 var game_data = {};
+var game_start = false;
 
 
 const firebaseConfig = {
@@ -82,6 +83,7 @@ if (user) {
 		opponentId = player_1;
 		console.log(data);
 		add_player_2(data,gameId);
+		game_start = true;
 
     console.log("User turn:");
 		console.log(data.turn);
@@ -98,8 +100,8 @@ else {
 const gamesRef = ref(database, 'games/' + gameId);
 onValue(gamesRef, (snapshot) => {
 	var data = snapshot.val();
-	if (data == null) {
-		window.location.href = "https://jcamille2023.github.io/tictactoe/multiplayer/index?game_removed=true";
+	if (data == null && game_start == true) {
+		window.location.href = "https://jcamille2023.github.io/tictactoe/multiplayer?game_removed=true";
 	}
 	var player_turn = data['turn'];
 	console.log(player_turn);
