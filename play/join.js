@@ -27,7 +27,12 @@ const auth = getAuth(app);
 const database = getDatabase();
 const dbRef = ref(getDatabase());
 
-
+function delete_session() {
+	let game_ref = ref(database, "/games/" + gameId);
+	remove(game_ref);
+	console.log("Game session deleted.")
+}
+window.delete_session = delete_session;
 function add_player_2(a,b) { // adds player 2 to database
 	set(ref(database, "/games/" + b), a);
  }
@@ -93,6 +98,9 @@ else {
 const gamesRef = ref(database, 'games/' + gameId);
 onValue(gamesRef, (snapshot) => {
 	var data = snapshot.val();
+	if (data == null) {
+		window.location.href = "https://jcamille2023.github.io/tictactoe/multiplayer/index?game_removed=true";
+	}
 	var player_turn = data['turn'];
 	console.log(player_turn);
 	if (player_turn == playerId) {
@@ -160,12 +168,4 @@ function move_multi(button_number) {
 	}
 window.move_multi = move_multi;
 
-
-
-
- 
-
-
-
-	
 
