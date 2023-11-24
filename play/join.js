@@ -120,6 +120,10 @@ onValue(gamesRef, (snapshot) => {
 const positionsRef = ref(database, 'games/' + gameId + '/positions');
 onValue(positionsRef, (snapshot) => {
 	var data = snapshot.val();
+	if(data == null) {
+		console.log("no position data")
+	}
+	else {
 	for(let n = 1; n < 9; n++) {
     let button_id = "button_" + n.toString();
     if (data[n] == player_1) {
@@ -129,6 +133,7 @@ onValue(positionsRef, (snapshot) => {
       document.getElementById(button_id).innerHTML = "O";
     }
   }
+	}
 	
 });
 		
