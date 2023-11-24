@@ -103,16 +103,21 @@ onValue(gamesRef, (snapshot) => {
 	if (data == null && game_start == true) {
 		window.location.href = "https://jcamille2023.github.io/tictactoe/multiplayer?game_removed=true";
 	}
-	var player_turn = data['turn'];
-	console.log(player_turn);
-	if (player_turn == playerId) {
-		activate_buttons();
-		document.getElementById("user_turn").innerHTML = "O's turn (" + playerId + ")";
+	if (data == null) {
+		console.log("no player turn data to be recorded")
+	}
+	else {
+		var player_turn = data['turn'];
+		console.log(player_turn);
+		if (player_turn == playerId) {
+			activate_buttons();
+			document.getElementById("user_turn").innerHTML = "O's turn (" + playerId + ")";
 		}
 		 
-	else if (player_turn == opponentId) {
-		deactivate_buttons();
-		document.getElementById("user_turn").innerHTML = "X's turn (" + opponentId + ")";
+		else if (player_turn == opponentId) {
+			deactivate_buttons();
+			document.getElementById("user_turn").innerHTML = "X's turn (" + opponentId + ")";
+		}
 	}
 	
 });
@@ -125,14 +130,15 @@ onValue(positionsRef, (snapshot) => {
 	}
 	else {
 	for(let n = 1; n < 9; n++) {
-    let button_id = "button_" + n.toString();
-    if (data[n] == player_1) {
-      document.getElementById(button_id).innerHTML = "X";
-    }
-    else if (data[n] == player_2) {
-      document.getElementById(button_id).innerHTML = "O";
-    }
-  }
+    		let button_id = "button_" + n.toString();
+		console.log(button_id + " changed");
+    		if (data[n] == player_1) {
+      			document.getElementById(button_id).innerHTML = "X";
+    		}
+    		else if (data[n] == player_2) {
+      			document.getElementById(button_id).innerHTML = "O";
+    		}
+  	}
 	}
 	
 });
