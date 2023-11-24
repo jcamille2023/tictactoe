@@ -125,6 +125,7 @@ onValue(gamesRef, (snapshot) => {
 const positionsRef = ref(database, 'games/' + gameId + '/positions');
 onValue(positionsRef, (snapshot) => {
 	var data = snapshot.val();
+	console.log(data);
 	if(data == null) {
 		console.log("no position data")
 	}
