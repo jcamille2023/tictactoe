@@ -4,14 +4,7 @@
     <title>Tic Tac Toe</title>
   </head>
   <body>
-    <script>
-      function back_to_lobby() {
-        delete_session();
-        window.location.href = 'https://jcamille2023.github.io/tictactoe/multiplayer' ;
-        
-      }
 
-    </script>
     
     <script src="./join.js" type="module"></script>
 
@@ -78,7 +71,7 @@
 </table>
   <p id="game_winner"></p>
   <button style="display: none" onclick="play_again()" id="play_again">Play again?</button>
-  <button onclick="back_to_lobby()">Back to lobby</button>
+  <button onclick="delete_session()">Back to lobby</button>
 
     
   </body>
