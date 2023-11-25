@@ -92,12 +92,7 @@ if (user) {
 		document.getElementById("opponent_id").innerHTML += opponentId;
 	});
 
-}
-else {
-	console.log("User is signed out");
-}
-});
-const gamesRef = ref(database, 'games/' + gameId);
+	const gamesRef = ref(database, 'games/' + gameId);
 onValue(gamesRef, (snapshot) => {
 	var data = snapshot.val();
 	 if (data == null && game_start == true) {
@@ -143,6 +138,13 @@ onValue(positionsRef, (snapshot) => {
 	}
 	
 });
+
+}
+else {
+	console.log("User is signed out");
+}
+});
+
 		
 
 
