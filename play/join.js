@@ -125,7 +125,7 @@ onValue(positionsRef, (snapshot) => {
 		console.log("no position data")
 	}
 	else {
-	for(let n = 1; n < 9; n++) {
+	for(let n = 1; n < 10; n++) {
     		let button_id = "button_" + n.toString();
 		console.log(button_id + " changed");
     		if (data[n] == player_1) {
@@ -153,17 +153,9 @@ function move_multi_2(user_id,button_number) {
 	get(child(dbRef, '/games/' + gameId + "/positions")).then((snapshot) => {
 			positions = snapshot.val();
 			console.log(positions);
-			if (positions != null) {
-				positions[button_number] = user_id;
-				console.log(positions);  
-				set(ref(database,"/games/" + gameId + "/positions"), positions);
-			}
-			else {
-				positions = {};
-				positions[button_number] = user_id;
-				console.log(positions);
-				set(ref(database,"/games/" + gameId + "/positions"), positions);
-			}
+			positions[button_number] = user_id;
+			console.log(positions);  
+			set(ref(database,"/games/" + gameId + "/positions"), positions);
 			
 		});
 }
@@ -180,7 +172,7 @@ function move_multi(button_number) {
 			console.log(game_data);
 			set(ref(database,"/games/" + gameId), game_data);
 		});
-			move_multi_2(player_1,button_number); // code sections farther down have been running out of order, therefore, calling them in a separate function will prevent this.
+			move_multi_2(player_2,button_number); // code sections farther down have been running out of order, therefore, calling them in a separate function will prevent this.
 	}
 window.move_multi = move_multi;
 
