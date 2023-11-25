@@ -95,6 +95,7 @@ if (user) {
 	const gamesRef = ref(database, 'games/' + gameId);
 onValue(gamesRef, (snapshot) => {
 	var data = snapshot.val();
+	console.log(data);
 	 if (data == null && game_start == true) {
 		window.location.href = "https://jcamille2023.github.io/tictactoe/multiplayer?game_removed=true";
 	}
