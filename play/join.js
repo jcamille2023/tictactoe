@@ -54,10 +54,7 @@ function check_win() {
     var counter = 0;
     for(let n = 0; n < win_combo.length; n++) {
         console.log(win_combo[n]);
-        console.log(n);
-        console.log(win_combo.length);
 for(let t = 0; t < win_combo[n].length; t++) {
-    console.log(win_combo[n][t]);
     if(!positions_used.includes(win_combo[n][t])){
         continue
     }
@@ -65,12 +62,15 @@ for(let t = 0; t < win_combo[n].length; t++) {
     
 }
         if(counter == 3) {
+	    console.log("win declared")
             return true;
         }
         else {
+	    console.log("moving on to next combo")
             counter = 0;
         }
-}
+}    
+	console.log("no win")
 	return false;
 }
 	
