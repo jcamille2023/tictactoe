@@ -73,12 +73,12 @@ if (user) {
 		// debugging purposes
 		console.log("Player 1:");
 		console.log(data['player_1']);
-  
+  		player_2 = playerId;
   
 		// adding player_2
 		data['player_2'] = playerId;
-    player_1 = data['player_1'];
-    turn = player_1
+    		player_1 = data['player_1'];
+    		turn = player_1
 		data.turn = turn;
 		opponentId = player_1;
 		console.log(data);
@@ -161,15 +161,15 @@ function move_multi_2(user_id,button_number) {
 		});
 }
 function move_multi(button_number) {
-	console.log(player_2);
+	console.log(opponentId);
 	// button_id = "button" + button_number;
 		// document.getElementById(button_id).innerHTML = "X"; when change is detected database will change the button, not the computer
 		get(child(dbRef, '/games/' + gameId)).then((snapshot) => {
 			var data = snapshot.val();
 			game_data = data;
 			console.log(game_data);
-			console.log(player_2);
-			game_data.turn = player_2;
+			console.log(opponentId);
+			game_data.turn = opponentId;
 			console.log(game_data);
 			set(ref(database,"/games/" + gameId), game_data);
 		});
