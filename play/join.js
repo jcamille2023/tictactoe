@@ -41,23 +41,36 @@ function declare_win() {
 	console.log("win declared");
 }
 
+
 function check_win() {
+	positions_used = []
 	for(let n = 0; n < Object.keys(positions).length; n++) {
 		let t = Object.keys(positions);
 		if(positions[t[n]] == playerId) {
 			positions_used.push(t[n])
 		}
 	}
-	console.log(positions_used);
-
-	for(let t = 0; t < win_combo.length; t++) {
-		for (let ele of win_combo[t]) {
-   			if (!positions_used.includes(ele)) {
-      			return false; 
-   			}
-			return true;
-		}
-	}
+    counter = 0;
+    for(let n = 0; n < win_combo.length; n++) {
+        console.log(win_combo[n]);
+        console.log(n);
+        console.log(win_combo.length);
+for(let t = 0; t < win_combo[n].length; t++) {
+    console.log(win_combo[n][t]);
+    if(!positions_used.includes(win_combo[n][t])){
+        continue
+    }
+    counter += 1;
+    
+}
+        if(counter == 3) {
+            return true;
+        }
+        else {
+            counter = 0;
+        }
+}
+	return false;
 }
 	
 function add_player_2(a,b) { // adds player 2 to database
