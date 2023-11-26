@@ -50,7 +50,7 @@ function check_win() {
 			positions_used.push(t[n])
 		}
 	}
-    counter = 0;
+    var counter = 0;
     for(let n = 0; n < win_combo.length; n++) {
         console.log(win_combo[n]);
         console.log(n);
