@@ -12,8 +12,8 @@ var positions = {};
 var gameId = 0;
 var game_data = {};
 var game_start = false;
-var win_combo =  [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
-var positions_used = []
+var win_combo =  [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
+var positions_used = [];
 var win_condition = false;
 
 
@@ -34,7 +34,7 @@ const dbRef = ref(getDatabase());
 function delete_session() {
 	let game_ref = ref(database, "/games/" + gameId);
 	remove(game_ref);
-	console.log("Game session deleted.")
+	console.log("Game session deleted.");
 }
 window.delete_session = delete_session;
 
@@ -51,14 +51,12 @@ function check_win() {
 	for(let t = 0; t < win_combo.length; t++) {
 		for (let ele of win_combo[t]) {
    			if (!positions_used.includes(ele)) {
-      			return win_condition = false;
-			break 
+      			return false; 
    			}
-			return win_condition = true;
+			return true;
 		}
 	}
-	let counter = 0;
-	let select_counter = 0;
+}
 	
 function add_player_2(a,b) { // adds player 2 to database
 	set(ref(database, "/games/" + b), a);
@@ -104,7 +102,7 @@ if (user) {
 		// adding player_2
 		data['player_2'] = playerId;
     		player_1 = data['player_1'];
-    		turn = player_1
+    		turn = player_1;
 		data.turn = turn;
 		opponentId = player_1;
 		console.log(data);
@@ -126,7 +124,7 @@ onValue(gamesRef, (snapshot) => {
 		window.location.href = "https://jcamille2023.github.io/tictactoe/multiplayer?game_removed=true";
 	}
 	if (data == null) {
-		console.log("no player turn data to be recorded")
+		console.log("no player turn data to be recorded");
 	}
 	else {
 		var player_turn = data['turn'];
@@ -149,11 +147,9 @@ onValue(positionsRef, (snapshot) => {
 	var data = snapshot.val();
 	console.log(data);
 	if(data == null) {
-		console.log("no position data")
+		console.log("no position data");
 	}
-	else {
-	check_win()
-	if(win_condition == false) {
+	else if(check_win() == false) {
 		for(let n = 1; n < 10; n++) {
     			let button_id = "button_" + n.toString();
 			console.log(button_id + " changed");
@@ -163,11 +159,11 @@ onValue(positionsRef, (snapshot) => {
     			else if (data[n] == player_2) {
       				document.getElementById(button_id).innerHTML = "O";
     			}
-  	}
+  		}
+	}
 	else {
  		declare_win()
    	}
-	}
 	
 });
 
