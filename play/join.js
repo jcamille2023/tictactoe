@@ -42,8 +42,11 @@ function declare_win() {
 }
 
 function check_win() {
-	for(let n = 1; n < 10; n++) {
-		positions_used.push(positions.find(item => item[n] == playerId)); 
+	for(let n = 0; n < Object.keys(positions).length; n++) {
+		let t = Object.keys(positions);
+		if(positions[t[n]] == playerId) {
+			positions_used.push(t[n])
+		}
 	}
 	console.log(positions_used);
 
