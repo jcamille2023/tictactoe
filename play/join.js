@@ -1,5 +1,6 @@
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signInAnonymously, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 import { getDatabase, set, ref, onValue, get,child,remove } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
 
 var playerId = "";
@@ -7,14 +8,12 @@ var player_1 = "";
 var player_2 = "";
 var turn = "";
 var opponentId = "";
-var n = 0;
 var positions = {};
 var gameId = 0;
 var game_data = {};
 var game_start = false;
 var win_combo =  [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
 var positions_used = [];
-var win_condition = false;
 
 
 const firebaseConfig = {
@@ -96,12 +95,12 @@ if (user) {
 		console.log(data);
 		// debugging purposes
 		console.log("Player 1:");
-		console.log(data['player_1']);
+		console.log(data.player_1);
   		player_2 = playerId;
   
 		// adding player_2
-		data['player_2'] = playerId;
-    		player_1 = data['player_1'];
+		data.player_2 = playerId;
+    		player_1 = data.player_1;
     		turn = player_1;
 		data.turn = turn;
 		opponentId = player_1;
@@ -127,7 +126,7 @@ onValue(gamesRef, (snapshot) => {
 		console.log("no player turn data to be recorded");
 	}
 	else {
-		var player_turn = data['turn'];
+		var player_turn = data.turn;
 		console.log(player_turn);
 		if (player_turn == playerId) {
 			activate_buttons();
@@ -162,7 +161,7 @@ onValue(positionsRef, (snapshot) => {
   		}
 	}
 	else {
- 		declare_win()
+ 		declare_win();
    	}
 	
 });
@@ -203,5 +202,6 @@ function move_multi(button_number) {
 			move_multi_2(player_2,button_number); // code sections farther down have been running out of order, therefore, calling them in a separate function will prevent this.
 	}
 window.move_multi = move_multi;
+
 
 
