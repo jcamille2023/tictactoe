@@ -49,6 +49,7 @@ function check_win() {
 		if(positions[t[n]] == playerId) {
 			positions_used.push(t[n])
 		}
+		console.log(positions_used);
 	}
     var counter = 0;
     for(let n = 0; n < win_combo.length; n++) {
