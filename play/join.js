@@ -12,6 +12,9 @@ var positions = {};
 var gameId = 0;
 var game_data = {};
 var game_start = false;
+var win_combo =  [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
+var positions_used = []
+var win_condition = false;
 
 
 const firebaseConfig = {
@@ -34,6 +37,29 @@ function delete_session() {
 	console.log("Game session deleted.")
 }
 window.delete_session = delete_session;
+
+function declare_win() {
+	console.log("win declared");
+}
+
+function check_win() {
+	for(let n = 1; n < 10; n++) {
+		positions_used.push(positions.find(item => item[n] == playerId)); 
+	}
+	console.log(positions_used);
+
+	for(let t = 0; t < win_combo.length; t++) {
+		for (let ele of win_combo[t]) {
+   			if (!positions_used.includes(ele)) {
+      			return win_condition = false;
+			break 
+   			}
+			return win_condition = true;
+		}
+	}
+	let counter = 0;
+	let select_counter = 0;
+	
 function add_player_2(a,b) { // adds player 2 to database
 	set(ref(database, "/games/" + b), a);
  }
@@ -126,16 +152,21 @@ onValue(positionsRef, (snapshot) => {
 		console.log("no position data")
 	}
 	else {
-	for(let n = 1; n < 10; n++) {
-    		let button_id = "button_" + n.toString();
-		console.log(button_id + " changed");
-    		if (data[n] == player_1) {
-      			document.getElementById(button_id).innerHTML = "X";
-    		}
-    		else if (data[n] == player_2) {
-      			document.getElementById(button_id).innerHTML = "O";
-    		}
+	check_win()
+	if(win_condition == false) {
+		for(let n = 1; n < 10; n++) {
+    			let button_id = "button_" + n.toString();
+			console.log(button_id + " changed");
+    			if (data[n] == player_1) {
+      				document.getElementById(button_id).innerHTML = "X";
+    			}
+    			else if (data[n] == player_2) {
+      				document.getElementById(button_id).innerHTML = "O";
+    			}
   	}
+	else {
+ 		declare_win()
+   	}
 	}
 	
 });
