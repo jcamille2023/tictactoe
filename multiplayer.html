@@ -106,9 +106,7 @@ onValue(gamesRef, (snapshot) => {
     <script>
       function playWith(a) {
        if (a == "new") {
-        var url = new URL("https://jcamille2023.github.io/tictactoe/play/index");
-        url.searchParams.append('game_id', a);
-        console.log(url);
+        var url = new URL("https://jcamille2023.github.io/tictactoe/play/create");
         window.location.href = url;
        }
        else {
