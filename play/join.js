@@ -207,6 +207,7 @@ onValue(positionsRef, (snapshot) => {
 const winRef = ref(database, 'games/' + gameId + '/win');
 onValue(winRef, (snapshot) => {
 	const data = snapshot.val();
+	if(data != null) {
 	console.log(data);
 	deactivate_buttons();
 	document.getElementById("user_turn").remove();
@@ -215,6 +216,7 @@ onValue(winRef, (snapshot) => {
 	}
 	else {
 		document.getElementById("game-winner").innerHTML = "X wins (" + opponentId + ")";
+	}
 	}
 	
 });
