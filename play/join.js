@@ -41,7 +41,10 @@ function declare_win() {
 	console.log("win declared");
 	get(child(dbRef, "games/" + gameId)).then((snapshot) => {
 		const data = snapshot.val();
-		data.win = {winner: playerId};
+		var winner = {
+			winner: playerId,
+		};
+		data.win = winner;
 		set(ref(database, "games/" + gameId), data);
 		
 	});
@@ -205,8 +208,10 @@ const winRef = ref(database, 'games/' + gameId + '/win');
 onValue(winRef, (snapshot) => {
 	const data = snapshot.val();
 	console.log(data);
+	let win_data = data.win;
 	deactivate_buttons();
-	if(data.win.winner == playerId) {
+	document.getElementById("user_turn").remove();
+	if(win_data.winner == playerId) {
 		document.getElementById("game-winner").innerHTML = "O wins (" + playerId + ")";
 	}
 	else {
