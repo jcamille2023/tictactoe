@@ -212,10 +212,10 @@ onValue(winRef, (snapshot) => {
 	deactivate_buttons();
 	document.getElementById("user_turn").remove();
 	if(data.winner == playerId) {
-		document.getElementById("game-winner").innerHTML = "O wins (" + playerId + ")";
+		document.getElementById("game_winner").innerHTML = "O wins (" + playerId + ")";
 	}
 	else {
-		document.getElementById("game-winner").innerHTML = "X wins (" + opponentId + ")";
+		document.getElementById("game_winner").innerHTML = "X wins (" + opponentId + ")";
 	}
 	}
 	
