@@ -39,43 +39,48 @@ window.delete_session = delete_session;
 
 function declare_win() {
 	console.log("win declared");
+	get(child(dbRef, "games/" + gameId)).then((snapshot) => {
+		const data = snapshot.val();
+		data.win = {winner: playerId};
+		set(ref(database, "games/" + gameId), data);
+		
+	});
 }
 
 
 function check_win() {
 	positions_used = []
 	for(let n = 0; n < Object.keys(positions).length; n++) {
-		let t = Object.keys(positions);
-		if(positions[t[n]] == playerId) {
-			positions_used.push(t[n])
+		let b = Object.keys(positions);
+		if(positions[b[n]] == playerId) {
+			positions_used.push(b[n])
 		}
 		
 	}
 	console.log(positions_used);
-    var counter = 0;
-    for(let n = 0; n < win_combo.length; n++) {
-        console.log(win_combo[n]);
-for(let t = 0; t < win_combo[n].length; t++) {
-    if(!positions_used.includes(win_combo[n][t])){
-        continue
-    }
-    counter += 1;
-    console.log(counter);
-    
-}
-        if(counter == 3) {
-	    console.log("win declared")
-            return true;
+    let counter = 0;
+    for(let n = 0; n < win_combos.length; n++) {
+        for(t = 0; t < win_combos[n].length; t++) {
+            if(positions_used.includes(win_combos[n][t])) {
+                counter += 1;
+                console.log("New counter: " + counter);
+                console.log(win_combos[n][t] + " is in positions_used");
+            }
+            else {
+                console.log(win_combos[n][t] + " is not in positions_used");
+                counter = 0;
+                break;
+            }
+        }
+        if(counter >= 3) {
+            return true
         }
         else {
-	    console.log("moving on to next combo")
-            counter = 0;
+            continue
         }
-}    
-	console.log("no win")
-	return false;
+    }
+    return false
 }
-	
 function add_player_2(a,b) { // adds player 2 to database
 	set(ref(database, "/games/" + b), a);
  }
@@ -184,6 +189,19 @@ onValue(positionsRef, (snapshot) => {
    	}
 	
 });
+
+const winRef = ref(database, 'games/' + gameId + '/win');
+onValue(winRef, (snapshot) => {
+	const data = snapshot.val();
+	deactivate_buttons()
+	if(data.win.winner = playerId) {
+		document.getElementById("game-winner").innerHTML = "O wins (" + playerId + ")";
+	}
+	else {
+		ddocument.getElementById("game-winner").innerHTML = "X wins (" + opponentId + ")";
+	}
+	
+}
 
 }
 else {
