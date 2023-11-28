@@ -53,7 +53,7 @@ function check_win() {
 	for(let n = 0; n < Object.keys(positions).length; n++) {
 		let b = Object.keys(positions);
 		if(positions[b[n]] == playerId) {
-			positions_used.push(b[n]);
+			positions_used.push(Number(b[n]));
 		}
 		
 	}
