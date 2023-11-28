@@ -208,7 +208,6 @@ const winRef = ref(database, 'games/' + gameId + '/win');
 onValue(winRef, (snapshot) => {
 	const data = snapshot.val();
 	console.log(data);
-	console.log(win_data);
 	deactivate_buttons();
 	document.getElementById("user_turn").remove();
 	if(data.winner == playerId) {
