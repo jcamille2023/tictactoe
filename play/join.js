@@ -193,6 +193,7 @@ onValue(positionsRef, (snapshot) => {
 const winRef = ref(database, 'games/' + gameId + '/win');
 onValue(winRef, (snapshot) => {
 	const data = snapshot.val();
+	console.log(data);
 	deactivate_buttons();
 	if(data.win.winner == playerId) {
 		document.getElementById("game-winner").innerHTML = "O wins (" + playerId + ")";
