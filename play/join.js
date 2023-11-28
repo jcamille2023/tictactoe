@@ -209,6 +209,7 @@ onValue(winRef, (snapshot) => {
 	const data = snapshot.val();
 	console.log(data);
 	let win_data = data.win;
+	console.log(win_data);
 	deactivate_buttons();
 	document.getElementById("user_turn").remove();
 	if(win_data.winner == playerId) {
