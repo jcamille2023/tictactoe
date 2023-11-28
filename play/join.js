@@ -186,6 +186,17 @@ onValue(positionsRef, (snapshot) => {
 	}
 	else {
  		declare_win();
+		for(let n = 1; n < 10; n++) {
+    			let button_id = "button_" + n.toString();
+			console.log(button_id + " changed");
+    			if (data[n] == player_1) {
+      				document.getElementById(button_id).innerHTML = "X";
+    			}
+    			else if (data[n] == player_2) {
+      				document.getElementById(button_id).innerHTML = "O";
+    			}
+  		}
+		
    	}
 	
 });
