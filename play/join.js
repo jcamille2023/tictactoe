@@ -12,7 +12,7 @@ var positions = {};
 var gameId = 0;
 var game_data = {};
 var game_start = false;
-var win_combo =  [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
+var win_combos =  [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
 var positions_used = [];
 
 
@@ -49,18 +49,18 @@ function declare_win() {
 
 
 function check_win() {
-	positions_used = []
+	positions_used = [];
 	for(let n = 0; n < Object.keys(positions).length; n++) {
 		let b = Object.keys(positions);
 		if(positions[b[n]] == playerId) {
-			positions_used.push(b[n])
+			positions_used.push(b[n]);
 		}
 		
 	}
 	console.log(positions_used);
     let counter = 0;
     for(let n = 0; n < win_combos.length; n++) {
-        for(t = 0; t < win_combos[n].length; t++) {
+        for(let t = 0; t < win_combos[n].length; t++) {
             if(positions_used.includes(win_combos[n][t])) {
                 counter += 1;
                 console.log("New counter: " + counter);
@@ -73,13 +73,13 @@ function check_win() {
             }
         }
         if(counter >= 3) {
-            return true
+            return true;
         }
         else {
-            continue
+            continue;
         }
     }
-    return false
+    return false;
 }
 function add_player_2(a,b) { // adds player 2 to database
 	set(ref(database, "/games/" + b), a);
@@ -193,15 +193,15 @@ onValue(positionsRef, (snapshot) => {
 const winRef = ref(database, 'games/' + gameId + '/win');
 onValue(winRef, (snapshot) => {
 	const data = snapshot.val();
-	deactivate_buttons()
-	if(data.win.winner = playerId) {
+	deactivate_buttons();
+	if(data.win.winner == playerId) {
 		document.getElementById("game-winner").innerHTML = "O wins (" + playerId + ")";
 	}
 	else {
-		ddocument.getElementById("game-winner").innerHTML = "X wins (" + opponentId + ")";
+		document.getElementById("game-winner").innerHTML = "X wins (" + opponentId + ")";
 	}
 	
-}
+});
 
 }
 else {
