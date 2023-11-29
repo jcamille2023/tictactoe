@@ -122,12 +122,12 @@ if (user) {
 		console.log(data);
 		// debugging purposes
 		console.log("Player 1:");
-		console.log(data.player_1);
+		console.log(data.players.player_1);
   		player_2 = playerId;
   
 		// adding player_2
-		data.player_2 = playerId;
-    		player_1 = data.player_1;
+		data.players.player_2 = playerId;
+    		player_1 = data.players.player_1;
     		turn = player_1;
 		data.turn = turn;
 		opponentId = player_1;
