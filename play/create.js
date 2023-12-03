@@ -118,6 +118,14 @@ onAuthStateChanged(auth, (user) => {
 		console.log(playerId);
 		document.getElementById("user_id").innerHTML += playerId;
 		document.getElementById("game_id").innerHTML = gameId;
+		const gamesRef = ref(database, 'games/' + gameId);
+		onValue(gamesRef, (snapshot) => {
+			var data = snapshot.val();
+			console.log(data);
+	 		if (data == null && game_start == true) {
+				window.location.href = "https://jcamille2023.github.io/tictactoe/multiplayer?game_removed=true";
+			}
+		});
 		set(ref(database, "/games/" + gameId + "/players"), {
 		player_1: playerId,
     		});
@@ -128,18 +136,10 @@ onAuthStateChanged(auth, (user) => {
 			 if (data.player_2) {
 				 opponentId = data.player_2;
 				 document.getElementById("opponent_id").innerHTML += opponentId;
-				 set_turn(); 
+				 set_turn();
+				 game_start = true;
 			 }
 		 });
-
-		const gamesRef = ref(database, 'games/' + gameId);
-		onValue(gamesRef, (snapshot) => {
-			var data = snapshot.val();
-			console.log(data);
-	 		if (data == null && game_start == true) {
-				window.location.href = "https://jcamille2023.github.io/tictactoe/multiplayer?game_removed=true";
-			}
-		});
 
 		const winRef = ref(database, 'games/' + gameId + '/win');
 		onValue(winRef, (snapshot) => {
