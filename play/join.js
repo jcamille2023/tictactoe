@@ -117,7 +117,7 @@ if (user) {
     const searchParams = new URLSearchParams(window.location.search);
     gameId = searchParams.get('game_id');
     document.getElementById("game_id").innerHTML = gameId;
-    return onValue(ref(db, '/games/' + gameId + "/players"), (snapshot) => {
+    onValue(ref(database, '/games/' + gameId + "/players"), (snapshot) => {
 	    const data = snapshot.val();
 	    console.log(data);
 	    console.log(data.player_1 + " - Player 1");
