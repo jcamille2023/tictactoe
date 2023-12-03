@@ -117,31 +117,15 @@ if (user) {
     const searchParams = new URLSearchParams(window.location.search);
     gameId = searchParams.get('game_id');
     document.getElementById("game_id").innerHTML = gameId;
-	get(child(dbRef,'/games/' + gameId)).then((snapshot) => {
-		const data = snapshot.val();
-		console.log(data);
-		// debugging purposes
-		console.log("Player 1:");
-		console.log(data.players.player_1);
-  		player_2 = playerId;
-  
-		// adding player_2
-		data.players.player_2 = playerId;
-    		player_1 = data.players.player_1;
-    		turn = player_1;
-		data.turn = turn;
-		opponentId = player_1;
-		console.log(data);
-		add_player_2(data,gameId);
-		game_start = true;
-
-    console.log("User turn:");
-		console.log(data.turn);
-    
-		document.getElementById("user_turn").innerHTML += "(" + opponentId + ")";
-		document.getElementById("opponent_id").innerHTML += opponentId;
-	});
-
+    get(child(dbRef, "/games" + gameId + "/players")).then((snapshot) => {
+	    const data = snapshot.val();
+	    console.log(data.player_1 + " - Player 1");
+	    opponentId = data.player_1;
+	    data.player_2 = playerId;
+	    document.getElementById("user_turn").innerHTML += "(" + opponentId + ")";
+	    document.getElementById("opponent_id").innerHTML += opponentId;
+	    game_start = true;
+    });							   
 	const gamesRef = ref(database, 'games/' + gameId);
 onValue(gamesRef, (snapshot) => {
 	var data = snapshot.val();
@@ -149,11 +133,11 @@ onValue(gamesRef, (snapshot) => {
 	 if (data == null && game_start == true) {
 		window.location.href = "https://jcamille2023.github.io/tictactoe/multiplayer?game_removed=true";
 	}
-	if (data == null) {
+	if (data.turn == null) {
 		console.log("no player turn data to be recorded");
 	}
 	else {
-		var player_turn = data.turn;
+		var player_turn = data.turn.turn;
 		console.log(player_turn);
 		if (player_turn == playerId) {
 			activate_buttons();
