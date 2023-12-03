@@ -227,14 +227,10 @@ function move_multi(button_number) {
 	console.log(opponentId);
 	// button_id = "button" + button_number;
 		// document.getElementById(button_id).innerHTML = "X"; when change is detected database will change the button, not the computer
-		get(child(dbRef, '/games/' + gameId)).then((snapshot) => {
+		get(child(dbRef, '/games/' + gameId + '/turn')).then((snapshot) => {
 			var data = snapshot.val();
-			game_data = data;
-			console.log(game_data);
-			console.log(opponentId);
-			game_data.turn = opponentId;
-			console.log(game_data);
-			set(ref(database,"/games/" + gameId), game_data);
+			data.turn = opponentId;
+			set(ref(database,"/games/" + gameId), data);
 		});
 			move_multi_2(playerId,button_number); // code sections farther down have been running out of order, therefore, calling them in a separate function will prevent this.
 	}
