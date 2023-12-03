@@ -230,7 +230,7 @@ function move_multi(button_number) {
 		get(child(dbRef, '/games/' + gameId + '/turn')).then((snapshot) => {
 			var data = snapshot.val();
 			data.turn = opponentId;
-			set(ref(database,"/games/" + gameId), data);
+			set(ref(database,"/games/" + gameId + "/turn"), data);
 		});
 			move_multi_2(playerId,button_number); // code sections farther down have been running out of order, therefore, calling them in a separate function will prevent this.
 	}
