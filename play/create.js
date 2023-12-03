@@ -31,6 +31,7 @@ function declare_win() {
 
 var playerId;
 var opponentId;
+window.opponentId = opponentId;
 var turn;
 var win_combos =  [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
 var positions_used = [];
@@ -75,6 +76,7 @@ onAuthStateChanged(auth, (user) => {
 		var playersRef = ref(database, "/games/" + gameId + "/players");
 		onValue(playersRef, (snapshot) => {
 			 const data = snapshot.val();
+			 console.log(data);
 			 if (data.player_2) {
 				 opponentId = data.player_2;
 				 document.getElementById("opponent_id").innerHTML += opponentId;
