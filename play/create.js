@@ -96,9 +96,11 @@ onAuthStateChanged(auth, (user) => {
 			const data = snapshot.val();
 			if (data.turn == playerId) {
 				activate_buttons();
+				document.getElementById("user_turn").innerHTML += "X's turn" + "(" + playerId + ")";
 			}
 			else if (data.turn == opponentId) {
 				deactivate_buttons();
+				document.getElementById("user_turn").innerHTML += "O's turn" + "(" + playerId + ")";
 			}
 			}
 		});
