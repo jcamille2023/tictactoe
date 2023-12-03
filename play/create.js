@@ -1,8 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 import { getDatabase, set, ref, onValue, get,child,remove } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics.js";
-
 const firebaseConfig = {
     apiKey: "AIzaSyDkf2Xme8vIYwSjNgpikMPlHETkteqEsfI",
     authDomain: "tic-tac-toe-online-108ca.firebaseapp.com",
@@ -19,7 +17,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase();
 const dbRef = ref(getDatabase());
-const analytics = getAnalytics(app);
 
 function random_number_gen() {
 	return Math.floor(Math.random() * 9999);
