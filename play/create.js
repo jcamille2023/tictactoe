@@ -12,6 +12,7 @@ const firebaseConfig = {
     appId: "1:971654471519:web:3e05a829c5db81a4f920ea"
   };
 
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase();
@@ -26,17 +27,62 @@ function check_win() {
 }
 
 function declare_win() {
-	console.log("hurray");
+	console.log("win declared");
+	let data = {winner: playerId};
+	set(ref(database, "games/" + gameId + "/win"), data);
 }
+
 
 var playerId;
 var opponentId;
-window.opponentId = opponentId;
-var turn;
 var win_combos =  [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
 var positions_used = [];
 var positions;
 var gameId = random_number_gen();
+var game_start = false;
+
+function delete_session() {
+	let game_ref = ref(database, "/games/" + gameId);
+	remove(game_ref);
+	console.log("Game session deleted.");
+}
+window.delete_session = delete_session;
+
+function check_win() {
+	positions_used = [];
+	for(let n = 0; n < Object.keys(positions).length; n++) {
+		let b = Object.keys(positions);
+		if(positions[b[n]] == playerId) {
+			positions_used.push(Number(b[n]));
+		}
+		
+	}
+	console.log(positions_used);
+    let counter = 0;
+    for(let n = 0; n < win_combos.length; n++) {
+        for(let t = 0; t < win_combos[n].length; t++) {
+            if(positions_used.includes(win_combos[n][t])) {
+                counter += 1;
+                console.log("New counter: " + counter);
+                console.log(win_combos[n][t] + " is in positions_used");
+            }
+            else {
+                console.log(win_combos[n][t] + " is not in positions_used");
+                counter = 0;
+                break;
+            }
+        }
+        if(counter >= 3) {
+            return true;
+        }
+        else {
+            continue;
+        }
+    }
+    return false;
+}
+
+
 
 function get_game_data() {
 	get(child(dbRef, '/games/' + gameId)).then((snapshot) => {
@@ -89,6 +135,33 @@ onAuthStateChanged(auth, (user) => {
 				 set_turn(); 
 			 }
 		 });
+
+		const gamesRef = ref(database, 'games/' + gameId);
+		onValue(gamesRef, (snapshot) => {
+			var data = snapshot.val();
+			console.log(data);
+	 		if (data == null && game_start == true) {
+				window.location.href = "https://jcamille2023.github.io/tictactoe/multiplayer?game_removed=true";
+			}
+		});
+
+		const winRef = ref(database, 'games/' + gameId + '/win');
+		onValue(winRef, (snapshot) => {
+			const data = snapshot.val();
+			if(data != null) {
+				console.log(data);
+				deactivate_buttons();
+				document.getElementById("user_turn").remove();
+				if(data.winner == playerId) {
+					document.getElementById("game_winner").innerHTML = "X wins (" + playerId + ")";
+				}
+				else {
+					document.getElementById("game_winner").innerHTML = "O wins (" + opponentId + ")";
+				}
+			}
+		});
+
+		
 		var turnRef = ref(database, "/games/" + gameId + "/turn");
 		onValue(turnRef, (snapshot) => {
       		const data = snapshot.val();
