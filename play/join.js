@@ -4,13 +4,9 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 import { getDatabase, set, ref, onValue, get,child,remove } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
 
 var playerId = "";
-var player_1 = "";
-var player_2 = "";
-var turn = "";
 var opponentId = "";
 var positions = {};
 var gameId = 0;
-var game_data = {};
 var game_start = false;
 var win_combos =  [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
 var positions_used = [];
@@ -39,12 +35,8 @@ window.delete_session = delete_session;
 
 function declare_win() {
 	console.log("win declared");
-	get(child(dbRef, "games/" + gameId + "/win" )).then((snapshot) => {
-		const data = snapshot.val();
-		data.winner = playerId;
-		set(ref(database, "games/" + gameId + "/win"), data);
-		
-	});
+	let data = {winner: playerId};
+	set(ref(database, "games/" + gameId + "/win"), data);
 }
 
 
@@ -201,7 +193,6 @@ onValue(winRef, (snapshot) => {
 		document.getElementById("game_winner").innerHTML = "X wins (" + opponentId + ")";
 	}
 	}
-	
 });
 
 }
