@@ -126,7 +126,7 @@ if (user) {
 	    document.getElementById("user_turn").innerHTML += "(" + opponentId + ")";
 	    document.getElementById("opponent_id").innerHTML += opponentId;
 	    game_start = true;
-    });							   
+    }, {onlyOnce: true});							   
 	const gamesRef = ref(database, 'games/' + gameId);
 onValue(gamesRef, (snapshot) => {
 	var data = snapshot.val();
