@@ -123,6 +123,7 @@ onAuthStateChanged(auth, (user) => {
 			var data = snapshot.val();
 			console.log(data);
 	 		if (data == null && game_start == true) {
+				console.log("game null");
 				window.location.href = "https://jcamille2023.github.io/tictactoe/multiplayer?game_removed=true";
 			}
 		});
