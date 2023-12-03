@@ -39,13 +39,10 @@ window.delete_session = delete_session;
 
 function declare_win() {
 	console.log("win declared");
-	get(child(dbRef, "games/" + gameId)).then((snapshot) => {
+	get(child(dbRef, "games/" + gameId + "/win" )).then((snapshot) => {
 		const data = snapshot.val();
-		var winner = {
-			winner: playerId,
-		};
-		data.win = winner;
-		set(ref(database, "games/" + gameId), data);
+		data.winner = playerId;
+		set(ref(database, "games/" + gameId + "/win"), data);
 		
 	});
 }
@@ -165,10 +162,10 @@ onValue(positionsRef, (snapshot) => {
 		for(let n = 1; n < 10; n++) {
     			let button_id = "button_" + n.toString();
 			console.log(button_id + " changed");
-    			if (data[n] == player_1) {
+    			if (data[n] == opponentId) {
       				document.getElementById(button_id).innerHTML = "X";
     			}
-    			else if (data[n] == player_2) {
+    			else if (data[n] == playerId) {
       				document.getElementById(button_id).innerHTML = "O";
     			}
   		}
@@ -178,10 +175,10 @@ onValue(positionsRef, (snapshot) => {
 		for(let n = 1; n < 10; n++) {
     			let button_id = "button_" + n.toString();
 			console.log(button_id + " changed");
-    			if (data[n] == player_1) {
+    			if (data[n] == opponentId) {
       				document.getElementById(button_id).innerHTML = "X";
     			}
-    			else if (data[n] == player_2) {
+    			else if (data[n] == playerId) {
       				document.getElementById(button_id).innerHTML = "O";
     			}
   		}
@@ -224,7 +221,6 @@ function move_multi_2(user_id,button_number) {
 			positions[button_number] = user_id;
 			console.log(positions);  
 			set(ref(database,"/games/" + gameId + "/positions"), positions);
-			
 		});
 }
 function move_multi(button_number) {
@@ -240,7 +236,7 @@ function move_multi(button_number) {
 			console.log(game_data);
 			set(ref(database,"/games/" + gameId), game_data);
 		});
-			move_multi_2(player_2,button_number); // code sections farther down have been running out of order, therefore, calling them in a separate function will prevent this.
+			move_multi_2(playerId,button_number); // code sections farther down have been running out of order, therefore, calling them in a separate function will prevent this.
 	}
 window.move_multi = move_multi;
 
