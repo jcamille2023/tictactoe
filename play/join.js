@@ -84,8 +84,8 @@ function check_win() {
     }
     return false;
 }
-function add_player_2(a,b) { // adds player 2 to database
-	set(ref(database, "/games/" + b), a);
+function add_player_2(a) { // adds player 2 to database
+	set(ref(database, "/games/" + gameId + "/players"), a);
  }
 
 function deactivate_buttons() {
@@ -123,6 +123,7 @@ if (user) {
 	    console.log(data.player_1 + " - Player 1");
 	    opponentId = data.player_1;
 	    data.player_2 = playerId;
+	    add_player_2(data);
 	    document.getElementById("user_turn").innerHTML += "(" + opponentId + ")";
 	    document.getElementById("opponent_id").innerHTML += opponentId;
 	    game_start = true;
