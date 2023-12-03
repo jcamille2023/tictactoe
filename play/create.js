@@ -38,6 +38,12 @@ var positions_used = [];
 var positions;
 var gameId = random_number_gen();
 
+function get_game_data() {
+	get(child(dbRef, '/games/' + gameId)).then((snapshot) => {
+		return snapshot.val();
+	});
+}
+window.get_game_data = get_game_data;
 function activate_buttons() { // activates buttons upon player_2 joining
 	for (let n = 1; n != 10; n++) { 
         	let b = n.toString();
