@@ -119,6 +119,7 @@ if (user) {
     document.getElementById("game_id").innerHTML = gameId;
     get(child(dbRef, "/games" + gameId + "/players")).then((snapshot) => {
 	    const data = snapshot.val();
+	    console.log(data);
 	    console.log(data.player_1 + " - Player 1");
 	    opponentId = data.player_1;
 	    data.player_2 = playerId;
