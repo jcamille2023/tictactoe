@@ -22,10 +22,6 @@ function random_number_gen() {
 	return Math.floor(Math.random() * 9999);
 }
 
-function check_win() {
-	return true;
-}
-
 function declare_win() {
 	console.log("win declared");
 	let data = {winner: playerId};
