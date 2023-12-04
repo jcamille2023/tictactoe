@@ -95,7 +95,7 @@ function print_games(a) {
       console.log(a.length);
       for (let n = 0; n != a.length; n++) {
         console.log("hi");
-        list_players.innerHTML += button_text + a[n] + button_text_2 + a[n] + button_text_3 + button_text_4;
+        list_players.innerHTML += button_text + a[n] + button_text_2 + a[n] + button_text_3 + a[n] + button_text_4;
       }
     }      
 window.print_games = print_games;
