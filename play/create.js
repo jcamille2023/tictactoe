@@ -81,7 +81,7 @@ function check_win() {
             continue;
         }
     }
-    if(positions_used.length > 9) {
+    if(positions.length > 9) {
 	    return "tie";
     }
     return false;
