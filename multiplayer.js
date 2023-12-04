@@ -38,11 +38,16 @@ var list_of_games = [];
     const gamesRef = ref(database, 'games/');
 onValue(gamesRef, (snapshot) => {
     const data = snapshot.val();
-    console.log(data);
-    console.log(Object.keys(data));
-    list_of_games = Object.keys(data);
-    console.log(list_of_games);
-    print_games(list_of_games);
+    if (data != null) {
+        console.log(data);
+        console.log(Object.keys(data));
+        list_of_games = Object.keys(data);
+        console.log(list_of_games);
+        print_games(list_of_games);
+    }
+    else {
+        list_players.innerHTML = "There are no active games at this time.";
+    }
   });
     // ...
   } else {
