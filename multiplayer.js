@@ -47,7 +47,7 @@ onValue(gamesRef, (snapshot) => {
         print_games(list_of_games);
 
         for(let n = 0; n < Object.keys(data).length; n++) {
-            if (data[list_of_games[n]].player_2) {
+            if (data[list_of_games[n]].players.player_2) {
                 console.log(list_of_games[n]);
                 document.getElementById(list_of_games[n]).remove();
             }
