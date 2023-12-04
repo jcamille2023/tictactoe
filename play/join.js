@@ -42,6 +42,11 @@ function declare_win() {
 	set(ref(database, "games/" + gameId + "/win"), data);
 }
 
+function declare_tie() {
+	console.log("tie declared");
+	let data = {winner: "tie",};
+	set(ref(database, "games/" + gameId + "/win"), data);
+}
 
 function check_win() {
 	positions_used = [];
@@ -73,6 +78,9 @@ function check_win() {
         else {
             continue;
         }
+    }
+    if(positions_used.length == 9) {
+	    return "tie";
     }
     return false;
 }
@@ -153,6 +161,19 @@ onValue(positionsRef, (snapshot) => {
 	if(data == null) {
 		console.log("no position data");
 	}
+	else if (check_win() == "tie") {
+			declare_tie();
+			for(let n = 1; n < 10; n++) {
+    				let button_id = "button_" + n.toString();
+				console.log(button_id + " changed");
+    				if (data[n] == playerId) {
+      				document.getElementById(button_id).innerHTML = "O";
+    				}
+    				else if (data[n] == opponentId) {
+      					document.getElementById(button_id).innerHTML = "X";
+    				}
+  			}
+		}
 	else if(check_win() == false) {
 		for(let n = 1; n < 10; n++) {
     			let button_id = "button_" + n.toString();
@@ -191,6 +212,9 @@ onValue(winRef, (snapshot) => {
 	document.getElementById("user_turn").remove();
 	if(data.winner == playerId) {
 		document.getElementById("game_winner").innerHTML = "O wins (" + playerId + ")";
+	}
+	else if(data.winner == "tie"){
+			document.getElementById("game_winner").innerHTML = "Tie! No winner.";
 	}
 	else {
 		document.getElementById("game_winner").innerHTML = "X wins (" + opponentId + ")";
