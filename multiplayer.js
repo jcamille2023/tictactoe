@@ -49,6 +49,9 @@ onValue(gamesRef, (snapshot) => {
             if (data[list_of_games[n]].player_2) {
                 document.getElementById(list_of_games[n]).remove();
             }
+            if(!list_players.hasChildNodes()) {
+                list_players.innerHTML = "There are no active games at this time.";
+            }
         }
 
         
