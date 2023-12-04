@@ -59,7 +59,7 @@ onValue(gamesRef, (snapshot) => {
         
     }
     else {
-        list_players.innerHTML = "There are no active games at this time.";
+        list_players.innerHTML = "There are no joinable games at this time.";
     }
   });
     // ...
