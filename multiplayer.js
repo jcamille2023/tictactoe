@@ -44,6 +44,14 @@ onValue(gamesRef, (snapshot) => {
         list_of_games = Object.keys(data);
         console.log(list_of_games);
         print_games(list_of_games);
+
+        for(let n = 0, n < Object.keys(data).length, n++) {
+            if (data[list_of_games[n]].player_2) {
+                document.getElementById(list_of_games[n]).remove();
+            }
+        }
+
+        
     }
     else {
         list_players.innerHTML = "There are no active games at this time.";
@@ -75,14 +83,15 @@ setPersistence(auth, browserSessionPersistence)
 
 function print_games(a) {
       const list_players = document.getElementById("lists_of_games");
-      const button_text = "<button onclick=playWith('";
-      const button_text_2 = "')>";
-      const button_text_3 = "</button>";
+      const button_text = "<button id='"
+      const button_text_2 = "' onclick=playWith('";
+      const button_text_3 = "')>";
+      const button_text_4 = "</button>";
       list_players.innerHTML = "";
       console.log(a.length);
       for (let n = 0; n != a.length; n++) {
         console.log("hi");
-        list_players.innerHTML += button_text + a[n] + button_text_2 + a[n] + button_text_3;
+        list_players.innerHTML += button_text + a[n] + button_text_2 + a[n] + button_text_3 + button_text_4;
       }
     }      
 window.print_games = print_games;
