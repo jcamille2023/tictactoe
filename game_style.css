@@ -8,26 +8,6 @@ box {
 }
 
 
-.row {
-  display: flex;
-}
-
-.column {
-  flex: 50%;
-}
-
-.navbar {
-  text-align: right;
-}
-
-a {
-  padding: 5px;
-}
-
-
-body {
-  background: #0a0c37;  
-}
 
 #info-section {
   color: antiquewhite
