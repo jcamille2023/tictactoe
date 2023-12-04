@@ -31,9 +31,6 @@ const list_players = document.getElementById("lists_of_games");
     // https://firebase.google.com/docs/reference/js/auth.user
     const playerId = user.uid;
     console.log("User is signed in");
-    set(ref(database, 'players/' + playerId), {
-    username: playerId,
-  });
     console.log(playerId);
     document.getElementById("user_id").innerHTML = playerId;
     const gamesRef = ref(database, 'games/');
