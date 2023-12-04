@@ -51,7 +51,6 @@ function delete_session() {
 window.delete_session = delete_session;
 
 function check_win() {
-	
 	positions_used = [];
 	for(let n = 0; n < Object.keys(positions).length; n++) {
 		let b = Object.keys(positions);
@@ -82,7 +81,7 @@ function check_win() {
             continue;
         }
     }
-    if(positions_used.length == 9) {
+    if(positions_used.length > 9) {
 	    return "tie";
     }
     return false;
