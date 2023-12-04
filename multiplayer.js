@@ -1,4 +1,5 @@
 var list_of_games = [];
+const list_players = document.getElementById("lists_of_games");
 
     // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
@@ -85,7 +86,7 @@ setPersistence(auth, browserSessionPersistence)
   });
 
 function print_games(a) {
-      const list_players = document.getElementById("lists_of_games");
+      
       const button_text = "<button id='"
       const button_text_2 = "' onclick=playWith('";
       const button_text_3 = "')>";
