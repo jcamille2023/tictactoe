@@ -28,6 +28,12 @@ function declare_win() {
 	set(ref(database, "games/" + gameId + "/win"), data);
 }
 
+function declare_tie() {
+	console.log("tie declared");
+	let data = {winner: "tie",};
+	set(ref(database, "games/" + gameId + "/win"), data);
+}
+
 
 var playerId;
 var opponentId;
@@ -45,6 +51,7 @@ function delete_session() {
 window.delete_session = delete_session;
 
 function check_win() {
+	
 	positions_used = [];
 	for(let n = 0; n < Object.keys(positions).length; n++) {
 		let b = Object.keys(positions);
@@ -74,6 +81,9 @@ function check_win() {
         else {
             continue;
         }
+    }
+    if(positions_used.length == 9) {
+	    return "tie";
     }
     return false;
 }
@@ -152,6 +162,9 @@ onAuthStateChanged(auth, (user) => {
 				if(data.winner == playerId) {
 					document.getElementById("game_winner").innerHTML = "X wins (" + playerId + ")";
 				}
+				else if(data.winner == "tie"){
+					document.getElementById("game_winner").innerHTML = "Tie! No winner.";
+				}
 				else {
 					document.getElementById("game_winner").innerHTML = "O wins (" + opponentId + ")";
 				}
@@ -188,6 +201,19 @@ onAuthStateChanged(auth, (user) => {
 				console.log(button_id + " changed");
     				if (data[n] == playerId) {
       					document.getElementById(button_id).innerHTML = "X";
+    				}
+    				else if (data[n] == opponentId) {
+      					document.getElementById(button_id).innerHTML = "O";
+    				}
+  			}
+		}
+		else if (check_win() == "tie") {
+			declare_tie()
+			for(let n = 1; n < 10; n++) {
+    				let button_id = "button_" + n.toString();
+				console.log(button_id + " changed");
+    				if (data[n] == playerId) {
+      				document.getElementById(button_id).innerHTML = "X";
     				}
     				else if (data[n] == opponentId) {
       					document.getElementById(button_id).innerHTML = "O";
