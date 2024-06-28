@@ -5,7 +5,7 @@ const list_players = document.getElementById("lists_of_games");
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
   import { getAuth, onAuthStateChanged, signInAnonymously, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
   import { getDatabase, set, ref, onValue } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
-  // TODO: Add SDKs for Firebase products that you want to use
+
   // https://firebase.google.com/docs/web/setup#available-libraries
 
   // Your web app's Firebase configuration
